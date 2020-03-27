@@ -1,1 +1,7 @@
-<p>todo-app works!</p>
+<h1>TODO APP</h1>
+
+<ul class="todolist">
+    <li *ngFor="let todo of todos;index as i">
+        <span class="badge">{{i+1}}</span>{{todo.title}}
+    </li>
+</ul>
