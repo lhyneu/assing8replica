@@ -1,6 +1,5 @@
-<div>
-
+<div *ngIf="todoItem">
     <h2>{{todoItem.title}}</h2>
     <div><span>description: </span>{{todoItem.description}}</div>
-  
+    <button (click)="goBack()">go back</button>
 </div>

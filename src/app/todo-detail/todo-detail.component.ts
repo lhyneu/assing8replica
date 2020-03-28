@@ -29,4 +29,8 @@ export class TodoDetailComponent implements OnInit {
     this.getTodoItem();
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
 }

@@ -1,9 +1,9 @@
-<h1>TODO APP</h1>
-
+<button class='add-new' routerLink="/add">Add</button>
 <ul class="todolist">
     <li *ngFor="let todo of todos;index as i">
         <a routerLink="/detail/{{todo.id}}">
             <span class="badge">{{i+1}}</span>{{todo.title}}
         </a>
+        <button class="add-btn" (click)="deleteTodo()">DEL</button>
     </li>
 </ul>

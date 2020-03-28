@@ -23,4 +23,8 @@ export class TodoAppComponent implements OnInit {
     this.getTodos();
   }
 
+  deleteTodo(): void {
+    console.log("delete clicked");
+  }
+
 }
