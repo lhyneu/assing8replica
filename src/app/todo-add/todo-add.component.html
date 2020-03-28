@@ -1,0 +1,12 @@
+<div>
+    <label>title:
+      <input [value]="title" (input)="title = $event.target.value" placeholder="title"/>
+    </label>
+</div>
+<div>
+    <label>description:
+      <input [value]="description" (input)="description = $event.target.value" placeholder="description"/>
+    </label>
+</div>
+<button>Confirm</button>
+<button (click)="goBack()">Back</button>
