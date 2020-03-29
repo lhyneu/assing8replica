@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 
 import { TodoService } from "../todo-app/todo.service";
 import { Todo } from "../todo-app/todo"
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-todo-detail',
@@ -35,8 +36,11 @@ export class TodoDetailComponent implements OnInit {
 
   // add update button to send put request
   update(): void {
-    console.log(typeof(this.todoItem.dueDate));
-    this.todoService.putTodoItem(this.todoItem);
+    if(this.todoItem.title == "" || this.todoItem.description == "" || typeof(this.todoItem.dueDate)!=typeof(new Date())){
+      alert("please input valid data")
+    }else{
+      this.todoService.putTodoItem(this.todoItem);
+    }
   }
 
   // use router to navigate to main page

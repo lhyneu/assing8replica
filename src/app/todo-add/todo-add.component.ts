@@ -14,9 +14,9 @@ export class TodoAddComponent implements OnInit {
 
   title: string = "";
   description: string = "";
-  @Input() dueDate:Date = new Date();
+  @Input() dueDate: Date = new Date();
   constructor(
-    private location:Location,
+    private location: Location,
     private todoService: TodoService
   ) { }
 
@@ -27,11 +27,14 @@ export class TodoAddComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-  
+
   // use todo service to post new todo item
-  addTodo():void {
-    // console.log(this.dueDate)
-    this.todoService.postTodoItem(this.title, this.description, this.dueDate);
+  addTodo(): void {
+    if (this.title == "" || this.description == "" || typeof (this.dueDate) != typeof (new Date())) {
+      alert("please input valid data")
+    } else {
+      this.todoService.postTodoItem(this.title, this.description, this.dueDate);
+    }
   }
 
 }
