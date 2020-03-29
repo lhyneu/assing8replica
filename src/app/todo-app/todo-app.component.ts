@@ -12,13 +12,17 @@ import { Todo } from './todo';
 export class TodoAppComponent implements OnInit {
 
   todos: Todo[];
-  selectedTodo:Todo;
+  selectedTodo: Todo;
   getURL = 'http://127.0.0.1:3000/todos/'
 
-  getTodos(): void{
-    this.httpClient.get(this.getURL).subscribe((response:any)=>{
+  getTodos(): void {
+    // this.httpClient.get(this.getURL).subscribe((response:any)=>{
+    //   console.log(response);
+    //   this.todos=response;
+    // });
+    this.todoService.getTodos().subscribe((response: any) => {
       console.log(response);
-      this.todos=response;   //输入result报错时，指定一下response的类型
+      this.todos = response;
     });
   }
 
@@ -33,9 +37,10 @@ export class TodoAppComponent implements OnInit {
     console.log("delete clicked");
   }
 
-  onToggle(todo: Todo): void {
-    console.log(todo);
+  onToggle(todo: Todo) {
     todo.isComplete = !todo.isComplete;
+    this.todoService.putTodoItem(todo);
+    this.getTodos()
     console.log("toggle complete");
   }
 

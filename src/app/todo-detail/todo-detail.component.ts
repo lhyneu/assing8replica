@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import {Router} from '@angular/router';
 
 import { TodoService } from "../todo-app/todo.service";
 import { Todo } from "../todo-app/todo"
@@ -17,7 +18,7 @@ export class TodoDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private todoService: TodoService,
-    private location: Location
+    private router: Router
   ) { }
 
   getTodoItem(): void {
@@ -32,9 +33,13 @@ export class TodoDetailComponent implements OnInit {
     this.getTodoItem();
   }
 
+  update(): void {
+    console.log(typeof(this.todoItem.dueDate));
+    this.todoService.putTodoItem(this.todoItem);
+  }
+
   goBack(): void {
-    console.log(typeof(this.todoItem.dueDate))
-    this.location.back();
+    this.router.navigate(['/todos']);
   }
 
 }
