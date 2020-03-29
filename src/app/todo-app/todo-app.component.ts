@@ -34,14 +34,18 @@ export class TodoAppComponent implements OnInit {
 
   deleteTodo(todo: Todo): void {
     console.log(todo);
-    console.log("delete clicked");
+    this.todoService.delTodoItem(todo);
+    setTimeout(function(){ console.log('wait 10ms')}, 10);
+    console.log("delete complete");
+    this.getTodos()
   }
 
   onToggle(todo: Todo) {
     todo.isComplete = !todo.isComplete;
     this.todoService.putTodoItem(todo);
-    this.getTodos()
+    setTimeout(function(){ console.log('wait 0ms')}, 10);
     console.log("toggle complete");
+    this.getTodos()
   }
 
 }

@@ -49,7 +49,15 @@ export class TodoService {
       "dueDate": todoItem.dueDate,
     }, httpOptions).subscribe((response) => {
       console.log(response);
-      alert('Update Successfully!')
+      alert('update Successfully!')
+    })
+  }
+
+  delTodoItem(todoItem: Todo): void{
+    var delURL = 'http://localhost:3000/todos/' + todoItem.id;
+    this.httpClient.delete(delURL).subscribe((response) => {
+      console.log(response);
+      alert('delete Successfully!')
     })
   }
 
