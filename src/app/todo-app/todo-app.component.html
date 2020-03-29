@@ -2,8 +2,12 @@
 <ul class="todolist">
     <li *ngFor="let todo of todos;index as i">
         <a routerLink="/detail/{{todo.id}}">
-            <span class="badge">{{i+1}}</span>{{todo.title}}
+            <span class="badge">{{i+1}}</span>
+            <s *ngIf="todo.isComplete">{{todo.title}}</s>
+            <span *ngIf="!todo.isComplete">{{todo.title}}</span>
         </a>
-        <button class="add-btn" (click)="deleteTodo()">DEL</button>
+        <input (change)="onToggle(todo)" type="checkbox" [checked]="todo.isComplete">
+        <button class="delete" title="delete todo"
+      (click)="deleteTodo(todo)">x</button>
     </li>
 </ul>

@@ -1,22 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import {Todo} from "../todo-app/todo";
-import {TODOS} from "../fake-todos";
+import { Todo } from "../todo-app/todo";
+import { TODOS } from "../fake-todos";
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
-  constructor() { }
+  constructor(public httpClient: HttpClient) { }
 
-  getTodos(): Observable<Todo[]> {
-    return of(TODOS);
+  getUrl: string = "http://127.0.0.1:3000/todos/";
+  getTodos(): Observable<any> {
+    // HTTP GET
+    // UPDATE
+    // return of(TODOS);
+    return this.httpClient.get(this.getUrl);
   }
 
-  getTodoItem(id: string): Observable<Todo> {
-    return of(TODOS.find(todo => todo.id == id));
+  getTodoItem(id: string): any {
+    return this.httpClient.get(this.getUrl + id);
+  }
+
+  postTodoItem(title: string, description: string, dueDate: Date): void {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    var postURL = 'http://localhost:3000/todos';
+    this.httpClient.post(postURL, {
+      "isFinished": false,
+      "title": title,
+      "description": description,
+      "dueDate": dueDate,
+    }, httpOptions).subscribe((response) => {
+      console.log(response);
+      alert('Added Successfully!')
+    })
   }
 
 }

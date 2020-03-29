@@ -8,5 +8,10 @@
       <input [value]="description" (input)="description = $event.target.value" placeholder="description"/>
     </label>
 </div>
-<button>Confirm</button>
+<div>
+    <label>Due date:
+        <input type="datetime" [ngModel] ="dueDate | date:'yyyy-MM-dd HH:mm'" (ngModelChange)="dueDate = $event">
+    </label>
+</div>
+<button (click)="addTodo()">Confirm</button>
 <button (click)="goBack()">Back</button>

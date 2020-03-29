@@ -1,5 +1,18 @@
 <div *ngIf="todoItem">
-    <h2>{{todoItem.title}}</h2>
-    <div><span>description: </span>{{todoItem.description}}</div>
+    <div>
+        <label>Title:
+          <input [value]="todoItem.title" (input)="todoItem.title = $event.target.value" placeholder="title"/>
+        </label>
+    </div>
+    <div>
+        <label>Description:
+          <input [value]="todoItem.description" (input)="todoItem.description = $event.target.value" placeholder="description"/>
+        </label>
+    </div>
+    <div>
+        <label>Due date:
+            <input type="todoItem.datetime" [ngModel] ="todoItem.dueDate | date:'yyyy-MM-dd HH:mm'" (ngModelChange)="todoItem.dueDate = $event">
+        </label>
+    </div>
     <button (click)="goBack()">go back</button>
 </div>

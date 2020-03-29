@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { TodoService } from "../todo-app/todo.service";
-import {Todo} from "../todo-app/todo"
+import { Todo } from "../todo-app/todo"
 
 @Component({
   selector: 'app-todo-detail',
@@ -12,7 +12,7 @@ import {Todo} from "../todo-app/todo"
 })
 export class TodoDetailComponent implements OnInit {
 
-  todoItem: Todo;
+  @Input() todoItem: Todo;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,9 +20,12 @@ export class TodoDetailComponent implements OnInit {
     private location: Location
   ) { }
 
-  getTodoItem(): void{
+  getTodoItem(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.todoService.getTodoItem(id).subscribe(todo => this.todoItem = todo)
+    this.todoService.getTodoItem(id).subscribe((response: any) => {
+      console.log(response);
+      this.todoItem = response;
+    });
   }
 
   ngOnInit(): void {
@@ -30,6 +33,7 @@ export class TodoDetailComponent implements OnInit {
   }
 
   goBack(): void {
+    console.log(typeof(this.todoItem.dueDate))
     this.location.back();
   }
 
