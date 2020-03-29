@@ -15,7 +15,7 @@ export class TodoAppComponent implements OnInit {
   selectedTodo: Todo;
   getURL = 'http://127.0.0.1:3000/todos/'
 
-  getTodos(): void {
+  getTodos() {
     // this.httpClient.get(this.getURL).subscribe((response:any)=>{
     //   console.log(response);
     //   this.todos=response;
@@ -24,6 +24,7 @@ export class TodoAppComponent implements OnInit {
       console.log(response);
       this.todos = response;
     });
+    console.log('GET new data')
   }
 
   constructor(private todoService: TodoService, private httpClient: HttpClient) { }
@@ -35,17 +36,19 @@ export class TodoAppComponent implements OnInit {
   deleteTodo(todo: Todo): void {
     console.log(todo);
     this.todoService.delTodoItem(todo);
-    setTimeout(function(){ console.log('wait 10ms')}, 10);
+    setTimeout(() => {
+      this.getTodos()
+    }, 100);
     console.log("delete complete");
-    this.getTodos()
   }
 
   onToggle(todo: Todo) {
     todo.isComplete = !todo.isComplete;
     this.todoService.putTodoItem(todo);
-    setTimeout(function(){ console.log('wait 0ms')}, 10);
+    setTimeout(() => {
+      this.getTodos()
+    }, 0);
     console.log("toggle complete");
-    this.getTodos()
   }
 
 }
