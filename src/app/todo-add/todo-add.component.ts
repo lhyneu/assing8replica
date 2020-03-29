@@ -23,10 +23,12 @@ export class TodoAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // go back use location
   goBack(): void {
     this.location.back();
   }
-
+  
+  // use todo service to post new todo item
   addTodo():void {
     // console.log(this.dueDate)
     this.todoService.postTodoItem(this.title, this.description, this.dueDate);

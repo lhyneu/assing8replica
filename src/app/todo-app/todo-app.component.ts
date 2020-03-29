@@ -13,13 +13,9 @@ export class TodoAppComponent implements OnInit {
 
   todos: Todo[];
   selectedTodo: Todo;
-  getURL = 'http://127.0.0.1:3000/todos/'
 
+  // subscrive get response from todo service and set to bind variable to display
   getTodos() {
-    // this.httpClient.get(this.getURL).subscribe((response:any)=>{
-    //   console.log(response);
-    //   this.todos=response;
-    // });
     this.todoService.getTodos().subscribe((response: any) => {
       console.log(response);
       this.todos = response;
@@ -27,12 +23,16 @@ export class TodoAppComponent implements OnInit {
     console.log('GET new data')
   }
 
-  constructor(private todoService: TodoService, private httpClient: HttpClient) { }
+  // inject todoservice
+  constructor(private todoService: TodoService) { }
 
+  // init items while init
   ngOnInit(): void {
     this.getTodos();
   }
 
+  // delete function to delete selected item
+  // wait 100ms to refresh
   deleteTodo(todo: Todo): void {
     console.log(todo);
     this.todoService.delTodoItem(todo);
@@ -42,6 +42,8 @@ export class TodoAppComponent implements OnInit {
     console.log("delete complete");
   }
 
+  // toggle checkbox to change the complete status
+  // wait 0ms to refresh
   onToggle(todo: Todo) {
     todo.isComplete = !todo.isComplete;
     this.todoService.putTodoItem(todo);

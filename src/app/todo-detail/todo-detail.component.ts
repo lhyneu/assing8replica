@@ -33,11 +33,13 @@ export class TodoDetailComponent implements OnInit {
     this.getTodoItem();
   }
 
+  // add update button to send put request
   update(): void {
     console.log(typeof(this.todoItem.dueDate));
     this.todoService.putTodoItem(this.todoItem);
   }
 
+  // use router to navigate to main page
   goBack(): void {
     this.router.navigate(['/todos']);
   }
